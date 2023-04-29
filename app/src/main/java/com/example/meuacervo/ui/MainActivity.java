@@ -1,8 +1,10 @@
-package com.example.meuacervo;
+package com.example.meuacervo.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.meuacervo.R;
 
 public class MainActivity extends AppCompatActivity {
 
