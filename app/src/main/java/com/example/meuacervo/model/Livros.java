@@ -8,12 +8,18 @@ public class Livros {
     private String capa;
     private int paginas;
 
-    public Livros(String título, String autor, String capa, int paginas, int id) {
+    private int avalicao;
+
+    private String nota;
+
+    public Livros(String título, String autor, String capa, int paginas, int id, int avalicao, String nota) {
         this.id = id;
         this.título = título;
         this.autor = autor;
         this.capa = capa;
         this.paginas = paginas;
+        this.avalicao = avalicao;
+        this.nota = nota;
     }
 
     public String getTítulo() {
