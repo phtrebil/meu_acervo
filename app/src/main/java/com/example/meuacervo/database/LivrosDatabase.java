@@ -1,12 +1,16 @@
 package com.example.meuacervo.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.example.meuacervo.model.Livros;
 
 public class LivrosDatabase extends SQLiteOpenHelper {
 
@@ -50,5 +54,24 @@ public class LivrosDatabase extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + NOME_TABELA);
         onCreate(db);
 
+    }
+    void adicionaLivro(Livros livros){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUNA_AUTOR, livros.getAutor());
+        cv.put(COLUNA_TITULO, livros.getTítulo());
+        cv.put(COLUNA_CAPA, livros.getCapa());
+        cv.put(COLUNA_AVALIACAO, livros.getAvalicao());
+        cv.put(COLUNA_PAG, livros.getPaginas());
+        cv.put(COLUNA_NOTA, livros.getNota());
+
+        Long resultadoDb = db.insert(NOME_TABELA, null, cv);
+
+        if(resultadoDb == -1){
+            Toast.makeText(context, "erro ao adicionar livro", Toast.LENGTH_SHORT);
+        }else{
+            Toast.makeText(context, "livro adicionado com sucesso", Toast.LENGTH_SHORT);
+        }
     }
 }

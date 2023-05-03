@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
-
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/listaDeLivrosFragments">
+    <fragment
+        android:id="@+id/listaDeLivrosFragments"
+        android:name="com.example.meuacervo.ui.fragments.ListaDeLivrosFragments"
+        android:label="ListaDeLivrosFragments"
+        tools:layout="@layout/lista_de_livros">
+        <action
+            android:id="@+id/action_listaDeLivrosFragments_to_detalhesFragments"
+            app:destination="@id/detalhesFragments" />
+        <action
+            android:id="@+id/action_listaDeLivrosFragments_to_cadastroDeLivrosFragments"
+            app:destination="@id/cadastroDeLivrosFragments" />
+    </fragment>
+    <fragment
+        android:id="@+id/cadastroDeLivrosFragments"
+        android:name="com.example.meuacervo.ui.fragments.CadastroDeLivrosFragments"
+        android:label="CadastroDeLivrosFragments"
+        tools:layout="@layout/cadastro_de_livros">
+        <action
+            android:id="@+id/action_cadastroDeLivrosFragments_to_listaDeLivrosFragments"
+            app:destination="@id/listaDeLivrosFragments" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalhesFragments"
+        android:name="com.example.meuacervo.ui.fragments.DetalhesFragments"
+        android:label="DetalhesFragments"
+        tools:layout="@layout/detalhes">
+        <action
+            android:id="@+id/action_detalhesFragments_to_cadastroDeLivrosFragments"
+            app:destination="@id/cadastroDeLivrosFragments" />
+    </fragment>
 </navigation>
