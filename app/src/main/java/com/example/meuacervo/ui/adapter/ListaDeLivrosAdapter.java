@@ -6,7 +6,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.meuacervo.model.Livros;
+
+import java.util.List;
+
 public class ListaDeLivrosAdapter extends RecyclerView.Adapter<ListaDeLivrosAdapter.ListaDeLivrosViewHolder> {
+
+    private List<Livros> livros;
+
     @NonNull
     @Override
     public ListaDeLivrosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -26,6 +33,8 @@ public class ListaDeLivrosAdapter extends RecyclerView.Adapter<ListaDeLivrosAdap
     public class ListaDeLivrosViewHolder extends RecyclerView.ViewHolder {
         public ListaDeLivrosViewHolder(@NonNull View itemView) {
             super(itemView);
+
+
         }
     }
 }
