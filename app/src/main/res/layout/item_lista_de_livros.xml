@@ -34,11 +34,31 @@
             />
         <TextView
             android:id="@+id/nome_do_autor"
+            tools:text="J.R.R Tolkien"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/titulo_livro"
+            app:layout_constraintStart_toStartOf="@id/titulo_livro"
+            />
         <TextView
+            android:id="@+id/paginas_item"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            tools:text="464"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/PAG"
+            />
+
+        <TextView
+            android:id="@+id/PAG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="pag.:"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/capa_do_livro"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
