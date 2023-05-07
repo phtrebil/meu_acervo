@@ -66,7 +66,7 @@
         app:layout_constraintTop_toBottomOf="@id/autor_outlinedTextField">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email_add_cliente"
+            android:id="@+id/pag_add_cliente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="número de páginas"

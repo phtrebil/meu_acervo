@@ -10,12 +10,22 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meuacervo.R;
+import com.example.meuacervo.database.LivrosDatabase;
 import com.example.meuacervo.databinding.ListaDeLivrosBinding;
+import com.example.meuacervo.model.Livros;
+import com.example.meuacervo.ui.adapter.ListaDeLivrosAdapter;
+
+import java.util.List;
 
 public class ListaDeLivrosFragments extends Fragment {
 
+    private ListaDeLivrosAdapter adapter;
+
+    private LivrosDatabase livrosDatabase;
     private ListaDeLivrosBinding binding;
     private NavController navController;
 
@@ -23,6 +33,15 @@ public class ListaDeLivrosFragments extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = ListaDeLivrosBinding.inflate(inflater, container, false);
+
+        RecyclerView recyclerView = binding.rvListaDeLivros;
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        livrosDatabase = new LivrosDatabase(getActivity());
+
+        //List<Livros> listaLivros = livrosDatabase.getLivros();
+        //ListaDeLivrosAdapter adapter = new ListaDeLivrosAdapter(listaLivros, getActivity());
+        recyclerView.setAdapter(adapter);
         return binding.getRoot();
     }
 
@@ -35,6 +54,16 @@ public class ListaDeLivrosFragments extends Fragment {
         assert navHostFragment != null;
         navController = navHostFragment.getNavController();
 
+        configuraRecyclerView();
+        configuraFab();
+    }
+
+    private void configuraRecyclerView() {
+
+        binding.rvListaDeLivros.setAdapter(adapter);
+    }
+
+    private void configuraFab() {
         binding.fabAdicionaLivro.setOnClickListener(view1 ->
                 vaiParaFormulario()
         );
