@@ -2,6 +2,7 @@ package com.example.meuacervo.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
@@ -9,6 +10,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.example.meuacervo.model.Livros;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LivrosDatabase extends SQLiteOpenHelper {
 
@@ -36,14 +40,15 @@ public class LivrosDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query =
-                "CREATE TABLE " + NOME_DATABASE +
+                "CREATE TABLE " + NOME_TABELA +
                         " (" + COLUNA_ID + " INTEGER PRIMARY KEY  AUTOINCREMENT, " +
                         COLUNA_TITULO + " TEXT, " +
-                        COLUNA_AUTOR + "TEXT, " +
-                        COLUNA_CAPA + "TEXT, " +
-                        COLUNA_PAG + "INTEGER, " +
-                        COLUNA_AVALIACAO + "INTEGER, " +
-                        COLUNA_NOTA + "TEXT);";
+                        COLUNA_AUTOR + " TEXT, " +
+                        COLUNA_CAPA + " TEXT, " +
+                        COLUNA_PAG + " INTEGER, " +
+                        COLUNA_AVALIACAO + " INTEGER, " +
+                        COLUNA_NOTA + " TEXT);";
+
         db.execSQL(query);
     }
 
@@ -73,5 +78,35 @@ public class LivrosDatabase extends SQLiteOpenHelper {
         }
     }
 
+    public List<Livros> buscaTudo() {
+        List<Livros> livros = new ArrayList<>();
+
+        String selectQuery = "SELECT  * FROM " + NOME_TABELA;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+
+        if (cursor.moveToFirst()) {
+            do {
+                Livros livro = new Livros(0, "", "", "", 0, 0, "");
+                livro.setId(cursor.getInt(cursor.getColumnIndex(COLUNA_ID)));
+                livro.setAutor(cursor.getString(cursor.getColumnIndex(COLUNA_AUTOR)));
+                livro.setTítulo(cursor.getString(cursor.getColumnIndex(COLUNA_TITULO)));
+                livro.setCapa(cursor.getString(cursor.getColumnIndex(COLUNA_CAPA)));
+                livro.setAvalicao(cursor.getInt(cursor.getColumnIndex(COLUNA_AVALIACAO)));
+                livro.setPaginas(cursor.getInt(cursor.getColumnIndex(COLUNA_PAG)));
+                livro.setNota(cursor.getString(cursor.getColumnIndex(COLUNA_NOTA)));
+
+                livros.add(livro);
+            } while (cursor.moveToNext());
+        }
+
+
+        db.close();
+
+
+        return livros;
+    }
 
 }

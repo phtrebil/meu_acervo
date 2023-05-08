@@ -39,8 +39,8 @@ public class ListaDeLivrosFragments extends Fragment {
 
         livrosDatabase = new LivrosDatabase(getActivity());
 
-        //List<Livros> listaLivros = livrosDatabase.getLivros();
-        //ListaDeLivrosAdapter adapter = new ListaDeLivrosAdapter(listaLivros, getActivity());
+        List<Livros> listaLivros = livrosDatabase.buscaTudo();
+        ListaDeLivrosAdapter adapter = new ListaDeLivrosAdapter(listaLivros, getActivity());
         recyclerView.setAdapter(adapter);
         return binding.getRoot();
     }
