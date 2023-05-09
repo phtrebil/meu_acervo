@@ -1,6 +1,7 @@
 package com.example.meuacervo.ui.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ public class ListaDeLivrosAdapter extends RecyclerView.Adapter<ListaDeLivrosAdap
         this.context = context;
     }
 
-    public void setQuandoClicaNoItem(QuandoClicaNoItem quandoClicaNoItem){
+    public void setQuandoClicaNoItem(QuandoClicaNoItem quandoClicaNoItem) {
         this.quandoClicaNoItem = quandoClicaNoItem;
     }
 
@@ -64,13 +65,15 @@ public class ListaDeLivrosAdapter extends RecyclerView.Adapter<ListaDeLivrosAdap
 
         public void vincula(Livros livro) {
             TextView titulo = itemView.findViewById(R.id.titulo_livro);
-            titulo.setText(livro.getTítulo());
+            titulo.setText(livro.getTítulo().toString());
             TextView autor = itemView.findViewById(R.id.nome_do_autor);
-            autor.setText(livro.getAutor());
+            autor.setText(livro.getAutor().toString());
             TextView paginas = itemView.findViewById(R.id.paginas_item);
-            paginas.setText(livro.getPaginas());
+            paginas.setText(String.valueOf(livro.getPaginas()));
             ImageView capa = itemView.findViewById(R.id.capa_do_livro);
-            Picasso.get().load(livro.getCapa()).into(capa);
+            if (!TextUtils.isEmpty(livro.getCapa())) {
+                Picasso.get().load(livro.getCapa()).into(capa);
+            }
         }
     }
 }

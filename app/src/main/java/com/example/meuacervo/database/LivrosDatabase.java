@@ -90,19 +90,19 @@ public class LivrosDatabase extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Livros livro = new Livros(0, "", "", "", 0, 0, "");
-                livro.setId(cursor.getInt(cursor.getColumnIndex(COLUNA_ID)));
-                livro.setAutor(cursor.getString(cursor.getColumnIndex(COLUNA_AUTOR)));
-                livro.setTítulo(cursor.getString(cursor.getColumnIndex(COLUNA_TITULO)));
-                livro.setCapa(cursor.getString(cursor.getColumnIndex(COLUNA_CAPA)));
-                livro.setAvalicao(cursor.getInt(cursor.getColumnIndex(COLUNA_AVALIACAO)));
-                livro.setPaginas(cursor.getInt(cursor.getColumnIndex(COLUNA_PAG)));
-                livro.setNota(cursor.getString(cursor.getColumnIndex(COLUNA_NOTA)));
+                livro.setId(cursor.getInt(cursor.getColumnIndexOrThrow(COLUNA_ID)));
+                livro.setAutor(cursor.getString(cursor.getColumnIndexOrThrow(COLUNA_AUTOR)));
+                livro.setTítulo(cursor.getString(cursor.getColumnIndexOrThrow(COLUNA_TITULO)));
+                livro.setCapa(cursor.getString(cursor.getColumnIndexOrThrow(COLUNA_CAPA)));
+                livro.setAvalicao(cursor.getInt(cursor.getColumnIndexOrThrow(COLUNA_AVALIACAO)));
+                livro.setPaginas(cursor.getInt(cursor.getColumnIndexOrThrow(COLUNA_PAG)));
+                livro.setNota(cursor.getString(cursor.getColumnIndexOrThrow(COLUNA_NOTA)));
 
                 livros.add(livro);
             } while (cursor.moveToNext());
         }
 
-
+        cursor.close();
         db.close();
 
 

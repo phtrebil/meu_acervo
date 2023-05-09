@@ -1,7 +1,6 @@
 package com.example.meuacervo.ui.fragments;
 
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,6 +11,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.meuacervo.R;
 import com.example.meuacervo.database.LivrosDatabase;
@@ -21,6 +22,7 @@ import com.example.meuacervo.model.Livros;
 public class CadastroDeLivrosFragments extends Fragment {
 
     private LivrosDatabase database;
+    private NavController navController;
     private Livros livros;
 
     private CadastroDeLivrosBinding binding;
@@ -40,6 +42,12 @@ public class CadastroDeLivrosFragments extends Fragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        navController = Navigation.findNavController(view);
+    }
+
+    @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_cadasro_salvar, menu);
         super.onCreateOptionsMenu(menu, inflater);
@@ -50,16 +58,25 @@ public class CadastroDeLivrosFragments extends Fragment {
         if(item.getItemId() == R.id.menu_cadastr_salvar){
             preencheLivro(livros);
             database.adicionaLivro(livros);
+            vaiParaListaDeLivros();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    private void vaiParaListaDeLivros() {
+        navController.navigate(R.id.action_cadastroDeLivrosFragments_to_listaDeLivrosFragments);
+    }
+
     private void preencheLivro(Livros livros) {
-        livros.setTítulo(binding.tituloAdd.toString());
-        livros.setAutor(binding.tituloAdd.toString());
+        livros.setTítulo(binding.tituloAdd.getText().toString());
+        livros.setAutor(binding.autorAdd.getText().toString());
         int numPaginas = Integer.parseInt(binding.pagAddCliente.getText().toString());
         livros.setPaginas(numPaginas);
+        livros.setNota(binding.notaAdd.toString());
+        int avaliacao = Integer.parseInt(binding.avaliacaoAdd.getText().toString());
+        livros.setAvalicao(avaliacao);
+
 
     }
 }

@@ -59,8 +59,11 @@ public class ListaDeLivrosFragments extends Fragment {
     }
 
     private void configuraRecyclerView() {
-
+        adapter = new ListaDeLivrosAdapter(livrosDatabase.buscaTudo(), getActivity());
         binding.rvListaDeLivros.setAdapter(adapter);
+        LinearLayoutManager layout = new LinearLayoutManager(getActivity());
+        binding.rvListaDeLivros.setLayoutManager(layout);
+
     }
 
     private void configuraFab() {
