@@ -109,4 +109,61 @@ public class LivrosDatabase extends SQLiteOpenHelper {
         return livros;
     }
 
+    public void deleteLivro(Livros livro) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete(NOME_TABELA, COLUNA_ID + " = ?",
+                new String[]{String.valueOf(livro.getId())});
+        db.close();
+        if (result == 1) {
+            Toast.makeText(context, "Livro excluído com sucesso", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Erro ao excluir livro", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void atualizaLivro(Livros livro) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUNA_AUTOR, livro.getAutor());
+        cv.put(COLUNA_TITULO, livro.getTítulo());
+        cv.put(COLUNA_CAPA, livro.getCapa());
+        cv.put(COLUNA_AVALIACAO, livro.getAvalicao());
+        cv.put(COLUNA_PAG, livro.getPaginas());
+        cv.put(COLUNA_NOTA, livro.getNota());
+
+        int resultadoDb = db.update(NOME_TABELA, cv, COLUNA_ID + "=?", new String[] { String.valueOf(livro.getId()) });
+
+        if (resultadoDb > 0) {
+            Toast.makeText(context, "Livro atualizado com sucesso", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Erro ao atualizar livro", Toast.LENGTH_SHORT).show();
+        }
+
+        db.close();
+    }
+
+    public Livros buscaLivroPorId(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + NOME_TABELA + " WHERE " + COLUNA_ID + " = " + id;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        Livros livro = null;
+        if (cursor.moveToFirst()) {
+            livro = new Livros(0, "", "", "", 0, 0, "");
+            livro.setId(cursor.getInt(cursor.getColumnIndexOrThrow(COLUNA_ID)));
+            livro.setAutor(cursor.getString(cursor.getColumnIndexOrThrow(COLUNA_AUTOR)));
+            livro.setTítulo(cursor.getString(cursor.getColumnIndexOrThrow(COLUNA_TITULO)));
+            livro.setCapa(cursor.getString(cursor.getColumnIndexOrThrow(COLUNA_CAPA)));
+            livro.setAvalicao(cursor.getInt(cursor.getColumnIndexOrThrow(COLUNA_AVALIACAO)));
+            livro.setPaginas(cursor.getInt(cursor.getColumnIndexOrThrow(COLUNA_PAG)));
+            livro.setNota(cursor.getString(cursor.getColumnIndexOrThrow(COLUNA_NOTA)));
+        }
+
+        cursor.close();
+        db.close();
+        return livro;
+    }
+
+
 }
