@@ -56,14 +56,14 @@ public class ListaDeLivrosAdapter extends RecyclerView.Adapter<ListaDeLivrosAdap
 
     public class ListaDeLivrosViewHolder extends RecyclerView.ViewHolder {
 
-
+        private Livros livro;
         public ListaDeLivrosViewHolder(@NonNull View itemView) {
             super(itemView);
-
-
+            itemView.setOnClickListener(view -> quandoClicaNoItem.quandoClicaNoItem(livro));
         }
 
         public void vincula(Livros livro) {
+            this.livro = livro;
             TextView titulo = itemView.findViewById(R.id.titulo_livro);
             titulo.setText(livro.getTítulo().toString());
             TextView autor = itemView.findViewById(R.id.nome_do_autor);

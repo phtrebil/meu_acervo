@@ -4,5 +4,5 @@ import com.example.meuacervo.model.Livros;
 
 public interface QuandoClicaNoItem {
 
-    void quandoClicaNoItem(Livros livro, int posicao);
+    void quandoClicaNoItem(Livros livro);
 }

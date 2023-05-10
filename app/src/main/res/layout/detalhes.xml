@@ -21,7 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
-            android:id="@+id/nome_detalhes"
+            android:id="@+id/titulo_detalhes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Senhor dos Aneis: As duas torres"
@@ -40,8 +40,8 @@
             android:text="Autor:"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/nome_detalhes"
-            app:layout_constraintStart_toStartOf="@id/nome_detalhes"
+            app:layout_constraintTop_toBottomOf="@id/titulo_detalhes"
+            app:layout_constraintStart_toStartOf="@id/titulo_detalhes"
             />
 
         <TextView

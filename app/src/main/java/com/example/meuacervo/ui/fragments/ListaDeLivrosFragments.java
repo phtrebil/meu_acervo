@@ -18,6 +18,7 @@ import com.example.meuacervo.database.LivrosDatabase;
 import com.example.meuacervo.databinding.ListaDeLivrosBinding;
 import com.example.meuacervo.model.Livros;
 import com.example.meuacervo.ui.adapter.ListaDeLivrosAdapter;
+import com.example.meuacervo.ui.fragments.ListaDeLivrosFragmentsDirections;
 
 import java.util.List;
 
@@ -64,7 +65,16 @@ public class ListaDeLivrosFragments extends Fragment {
         LinearLayoutManager layout = new LinearLayoutManager(getActivity());
         binding.rvListaDeLivros.setLayoutManager(layout);
 
+        adapter.setQuandoClicaNoItem(livro -> {
+            vaiParaDetalhesFragment(livro);
+        });
+
     }
+
+    private void vaiParaDetalhesFragment(Livros livro) {
+        navController.navigate(com.example.meuacervo.ui.fragments.ListaDeLivrosFragmentsDirections.actionListaDeLivrosFragmentsToDetalhesFragments(livro.getId()));
+    }
+
 
     private void configuraFab() {
         binding.fabAdicionaLivro.setOnClickListener(view1 ->

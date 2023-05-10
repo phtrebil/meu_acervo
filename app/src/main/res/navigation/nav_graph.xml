@@ -33,5 +33,11 @@
         <action
             android:id="@+id/action_detalhesFragments_to_cadastroDeLivrosFragments"
             app:destination="@id/cadastroDeLivrosFragments" />
+        <argument
+            android:name="id_livro"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_detalhesFragments_to_listaDeLivrosFragments"
+            app:destination="@id/listaDeLivrosFragments" />
     </fragment>
 </navigation>
