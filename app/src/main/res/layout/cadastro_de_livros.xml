@@ -1,120 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imagem_add_capa"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_margin="16dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/imagem_padrao"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/titulo_outlinedTextField"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_constraintEnd_toEndOf="@id/imagem_add_capa"
-        app:layout_constraintStart_toStartOf="@id/imagem_add_capa"
-        app:layout_constraintTop_toBottomOf="@id/imagem_add_capa">
+        android:layout_height="match_parent"
+        >
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/titulo_add"
-            android:inputType="text"
+        <ImageView
+            android:id="@+id/imagem_add_capa"
+            android:layout_width="150dp"
+            android:layout_height="250dp"
+            android:layout_margin="16dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/imagem_padrao"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/titulo_outlinedTextField"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Título do Livro"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="@id/imagem_add_capa"
+            app:layout_constraintStart_toStartOf="@id/imagem_add_capa"
+            app:layout_constraintTop_toBottomOf="@id/imagem_add_capa">
 
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/titulo_add"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Título do Livro"
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/autor_outlinedTextField"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_constraintEnd_toEndOf="@id/titulo_outlinedTextField"
-        app:layout_constraintStart_toStartOf="@id/titulo_outlinedTextField"
-        app:layout_constraintTop_toBottomOf="@id/titulo_outlinedTextField">
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/autor_add"
-            android:inputType="text"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/autor_outlinedTextField"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="nome do autor"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="@id/titulo_outlinedTextField"
+            app:layout_constraintStart_toStartOf="@id/titulo_outlinedTextField"
+            app:layout_constraintTop_toBottomOf="@id/titulo_outlinedTextField">
 
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/autor_add"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="nome do autor"
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/paginas_outlinedTextField"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_constraintEnd_toEndOf="@id/autor_outlinedTextField"
-        app:layout_constraintStart_toStartOf="@id/autor_outlinedTextField"
-        app:layout_constraintTop_toBottomOf="@id/autor_outlinedTextField">
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/pag_add_cliente"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/paginas_outlinedTextField"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="número de páginas"
-            android:inputType="number"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="@id/autor_outlinedTextField"
+            app:layout_constraintStart_toStartOf="@id/autor_outlinedTextField"
+            app:layout_constraintTop_toBottomOf="@id/autor_outlinedTextField">
 
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pag_add_cliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="número de páginas"
+                android:inputType="number"
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/avaliacao_outlinedTextField"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_constraintEnd_toEndOf="@id/paginas_outlinedTextField"
-        app:layout_constraintStart_toStartOf="@id/paginas_outlinedTextField"
-        app:layout_constraintTop_toBottomOf="@id/paginas_outlinedTextField">
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/avaliacao_add"
-            android:inputType="number"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/avaliacao_outlinedTextField"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Avaliacao"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="@id/paginas_outlinedTextField"
+            app:layout_constraintStart_toStartOf="@id/paginas_outlinedTextField"
+            app:layout_constraintTop_toBottomOf="@id/paginas_outlinedTextField">
 
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/avaliacao_add"
+                android:maxLength="1"
+                android:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Avaliacao"
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nota_outlinedTextField"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="16dp"
-        app:layout_constraintEnd_toEndOf="@id/avaliacao_outlinedTextField"
-        app:layout_constraintStart_toStartOf="@id/avaliacao_outlinedTextField"
-        app:layout_constraintTop_toBottomOf="@id/avaliacao_outlinedTextField">
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nota_add"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nota_outlinedTextField"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:hint="nota"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="@id/avaliacao_outlinedTextField"
+            app:layout_constraintStart_toStartOf="@id/avaliacao_outlinedTextField"
+            app:layout_constraintTop_toBottomOf="@id/avaliacao_outlinedTextField"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nota_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="nota"
 
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

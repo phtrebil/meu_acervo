@@ -14,7 +14,7 @@
 
         <ImageView
             android:id="@+id/formulario_imagem_imageview"
-            android:layout_width="0dp"
+            android:layout_width="100dp"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +48,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="url"
-                android:layout_margin="16dp"
 
                 />
         </com.google.android.material.textfield.TextInputLayout>

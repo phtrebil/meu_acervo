@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,16 +22,24 @@ import com.example.meuacervo.databinding.CadastroDeLivrosBinding;
 import com.example.meuacervo.model.Livros;
 import com.example.meuacervo.ui.MainActivity;
 import com.example.meuacervo.ui.dialog.AdicionaImagemDialog;
+import com.example.meuacervo.ui.validador.ValidadorDeCampo;
+import com.google.android.material.textfield.TextInputLayout;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
+
+import javax.xml.validation.Validator;
 
 public class CadastroDeLivrosFragments extends Fragment {
 
     private LivrosDatabase database;
     private NavController navController;
     private Livros livro;
+
+    private final List<ValidadorDeCampo> validadores = new ArrayList<>();
 
     private Bundle args;
 
@@ -62,12 +71,14 @@ public class CadastroDeLivrosFragments extends Fragment {
         binding.avaliacaoAdd.setText(String.valueOf(livro.getAvalicao()));
         binding.notaAdd.setText(livro.getNota());
         binding.pagAddCliente.setText(String.valueOf(livro.getPaginas()));
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
+        validaCampoAvaliacao();
         binding.imagemAddCapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +135,19 @@ public class CadastroDeLivrosFragments extends Fragment {
         int avaliacao = Integer.parseInt(Objects.requireNonNull(binding.avaliacaoAdd.getText()).toString());
         livros.setAvalicao(avaliacao);
 
-
     }
+
+    private void validaCampoAvaliacao() {
+        TextInputLayout textInputAvaliacao = binding.avaliacaoOutlinedTextField;
+        EditText campoAvaliacao = textInputAvaliacao.getEditText();
+        ValidadorDeCampo validadorAvaliacao = new ValidadorDeCampo(textInputAvaliacao);
+        validadores.add(validadorAvaliacao);
+        campoAvaliacao.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                validadorAvaliacao.estaValido();
+            }
+        });
+    }
+
+
 }
