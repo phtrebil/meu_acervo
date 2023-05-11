@@ -24,20 +24,25 @@
         <action
             android:id="@+id/action_cadastroDeLivrosFragments_to_listaDeLivrosFragments"
             app:destination="@id/listaDeLivrosFragments" />
+        <argument
+            android:name="livroId"
+            app:argType="integer" />
+
     </fragment>
     <fragment
         android:id="@+id/detalhesFragments"
         android:name="com.example.meuacervo.ui.fragments.DetalhesFragments"
         android:label="DetalhesFragments"
         tools:layout="@layout/detalhes">
-        <action
-            android:id="@+id/action_detalhesFragments_to_cadastroDeLivrosFragments"
-            app:destination="@id/cadastroDeLivrosFragments" />
         <argument
             android:name="id_livro"
             app:argType="integer" />
         <action
             android:id="@+id/action_detalhesFragments_to_listaDeLivrosFragments"
             app:destination="@id/listaDeLivrosFragments" />
+        <action
+            android:id="@+id/action_detalhesFragments_to_cadastroDeLivrosFragments2"
+            app:destination="@id/cadastroDeLivrosFragments" />
+
     </fragment>
 </navigation>

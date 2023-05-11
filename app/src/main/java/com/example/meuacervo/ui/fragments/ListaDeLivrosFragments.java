@@ -18,7 +18,6 @@ import com.example.meuacervo.database.LivrosDatabase;
 import com.example.meuacervo.databinding.ListaDeLivrosBinding;
 import com.example.meuacervo.model.Livros;
 import com.example.meuacervo.ui.adapter.ListaDeLivrosAdapter;
-import com.example.meuacervo.ui.fragments.ListaDeLivrosFragmentsDirections;
 
 import java.util.List;
 

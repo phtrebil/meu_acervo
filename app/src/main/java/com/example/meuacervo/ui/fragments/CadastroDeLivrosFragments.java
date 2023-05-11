@@ -16,14 +16,23 @@ import androidx.navigation.Navigation;
 
 import com.example.meuacervo.R;
 import com.example.meuacervo.database.LivrosDatabase;
+import com.example.meuacervo.databinding.AdicionarImagemBinding;
 import com.example.meuacervo.databinding.CadastroDeLivrosBinding;
 import com.example.meuacervo.model.Livros;
+import com.example.meuacervo.ui.MainActivity;
+import com.example.meuacervo.ui.dialog.AdicionaImagemDialog;
+import com.squareup.picasso.Picasso;
+
+import java.util.Objects;
+import java.util.function.Consumer;
 
 public class CadastroDeLivrosFragments extends Fragment {
 
     private LivrosDatabase database;
     private NavController navController;
-    private Livros livros;
+    private Livros livro;
+
+    private Bundle args;
 
     private CadastroDeLivrosBinding binding;
     @Override
@@ -31,20 +40,50 @@ public class CadastroDeLivrosFragments extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         database = new LivrosDatabase(getActivity());
-        livros = new Livros(0, "", "", "", 0, 0, "");
+        livro = new Livros(0, "", "", "", 0, 0, "");
+
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = CadastroDeLivrosBinding.inflate(inflater, container, false);
+        args = getArguments();
+        if (args != null && args.containsKey("livroId")) {
+            livro = database.buscaLivroPorId(args.getInt("livroId"));
+            preencheCampos(livro);
+        }
         return binding.getRoot();
+    }
+
+    private void preencheCampos(Livros livro) {
+        binding.autorAdd.setText(livro.getAutor());
+        binding.tituloAdd.setText(livro.getTítulo());
+        binding.avaliacaoAdd.setText(String.valueOf(livro.getAvalicao()));
+        binding.notaAdd.setText(livro.getNota());
+        binding.pagAddCliente.setText(String.valueOf(livro.getPaginas()));
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
+        binding.imagemAddCapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AdicionaImagemDialog dialog = new AdicionaImagemDialog(getContext());
+                dialog.mostra(new Consumer<String>() {
+                    @Override
+                    public void accept(String imagem) {
+                        String url = imagem;
+                        Picasso.get().load(url).into(binding.imagemAddCapa);
+                        livro.setCapa(imagem);
+                    }
+                });
+            }
+        });
+
+
     }
 
     @Override
@@ -56,12 +95,20 @@ public class CadastroDeLivrosFragments extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.menu_cadastr_salvar){
-            preencheLivro(livros);
-            database.adicionaLivro(livros);
+            preencheLivro(livro);
+            salvaLivro();
             vaiParaListaDeLivros();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void salvaLivro() {
+        if (args != null && args.containsKey("livroId")){
+            database.atualizaLivro(livro);
+        }else{
+            database.adicionaLivro(livro);
+        }
     }
 
     private void vaiParaListaDeLivros() {
@@ -69,12 +116,12 @@ public class CadastroDeLivrosFragments extends Fragment {
     }
 
     private void preencheLivro(Livros livros) {
-        livros.setTítulo(binding.tituloAdd.getText().toString());
-        livros.setAutor(binding.autorAdd.getText().toString());
-        int numPaginas = Integer.parseInt(binding.pagAddCliente.getText().toString());
+        livros.setTítulo(Objects.requireNonNull(binding.tituloAdd.getText()).toString());
+        livros.setAutor(Objects.requireNonNull(binding.autorAdd.getText()).toString());
+        int numPaginas = Integer.parseInt(Objects.requireNonNull(binding.pagAddCliente.getText()).toString());
         livros.setPaginas(numPaginas);
-        livros.setNota(binding.notaAdd.toString());
-        int avaliacao = Integer.parseInt(binding.avaliacaoAdd.getText().toString());
+        livros.setNota(Objects.requireNonNull(binding.notaAdd.getText()).toString());
+        int avaliacao = Integer.parseInt(Objects.requireNonNull(binding.avaliacaoAdd.getText()).toString());
         livros.setAvalicao(avaliacao);
 
 
